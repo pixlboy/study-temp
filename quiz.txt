@@ -1,0 +1,114 @@
+ng new <project>
+ng build
+ng serve
+ng init
+ng generate component <name> (ng g c <name>)
+
+View encapsulation :  helping apply styles to specific component. Works by using shadow DOM and taking cryptic attribues within each component
+Local reference/variable :  help duplicate the value bound to an HTML element
+
+Bindings: property bindings-
+1. DOM
+2. Directive - expect a JS object
+3. Custom
+
+Lifecycle events: in same order
+
+1. ngOnChanges - when data-bound property value changes (executed multiple times, called only when property was bound to a component)
+2. ngOnInit - on component initialization, after first ngOnChanges (executed once)
+3. ngDoCheck - during every ng-2 change detection cycle (called even if no change happens)
+4. ngAfterContentInit - after inserting content (<ng-content>)
+5. ngAfterContentChecked - after every check of inserted content (on every change detection inside <ng-content>)
+6. ngAfterViewInit - after initializing the component's views/child views (templateHTML elements initialized)
+7. ngAfterViewChecked - after every check of the component's views/child views (on every change detection of native content)
+8. ngOnDestroy - just before Angular 2 destroys the Directive/Component
+
+Q > Difference b/w ngOnChanges and ngDoCheck ?
+Q > Difference b/w ngAfterContentChecked and ngAfterViewChecked ?
+Q > Can we use multiple components in same page?
+hint: yes
+Q > What is the purpose of <ng-content> directive?
+hint:  to inject external content
+Q > Make two components to show nesting.
+Q > Give an example of property binding.
+hint: [binding]="value"
+Q > What is the default binding in ng-2?
+hint: one way
+Q > Syntax for 2 way binding?
+hint: [(ngModel)]="value"
+Q > What are decorators or view metadata ?
+hint : @Component, @Input
+Q > How can we use local variables inside angular class?
+hint : @ViewChild
+
+let iterable = [3, 5, 7];
+iterable.foo = 'hello';
+
+for (let i in iterable) {
+  console.log(i); // logs 0, 1, 2, "foo"
+}
+
+for (let i of iterable) {
+  console.log(i); // logs 3, 5, 7
+}
+
+(function(x) {
+    return (function(y) {
+        console.log(x);
+    })(2);
+})(1);
+
+--> What are weak maps.
+--> Javascript primitive types
+--> Angular copy - how it works
+--> add(5)(12); //17
+--> setTimeout vs setInterval
+--> pseudo class vs pseudo element
+--> Position an image to absolute center CSS
+--> CSS variables vs SASS variables
+--> CSS vh and vm units
+--> JSON vs POJO
+--> How do 2 controllers in angular talk ?
+
+ECMA2015 ES6
+var x = "something";
+let y = "someone";
+
+window.x v/s window.y
+----------------------------------------------
+self vs this
+----------------------------------------------
+fat arrow func =>
+----------------------------------------------
+Rest params ...args
+----------------------------------------------
+spread operator
+----------------------------------------------
+named params
+----------------------------------------------
+Comment a JSON
+----------------------------------------------
+mixins in SASS
+----------------------------------------------
+name some design patterns
+----------------------------------------------
+Angular 2 exp, React ?
+----------------------------------------------
+React - difference between: forceUpdate and setState
+----------------------------------------------
+Angular - What is ahead of time compilation AoT ?
+-----------------------------------------------
+--> Code Comment in React
+--> CSS Flex: flex -grow flex-shrink flex-basis
+--> Angular: ng-show vs ng-if
+--> CSS- Animate heights 0 auto
+--> CSS - outline vs border
+--> angular copy - how it works?
+--> CSS :root
+--> $onChanges
+--> $postLink
+--> popping out of overflow hidden--> insert html inside string
+--> attach an event to pseudo element
+--> Flexbox column view on repeating items
+--> Scrollbar preference
+--> font-variant: small-caps vs text-transform: capitalize

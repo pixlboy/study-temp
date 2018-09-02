@@ -1,0 +1,242 @@
+
+1. Module Design Pattern: JavaScript modules are the most prevalently used design patterns for keeping particular pieces of
+                            code independent of other components. This provides loose coupling to support well-structured code.
+
+var Exposer = (function() {
+  var privateVariable = 10;
+
+  var privateMethod = function() {
+    console.log('Inside a private method!');
+    privateVariable++;
+  }
+
+  var methodToExpose = function() {
+    console.log('This is a method I want to expose!');
+  }
+
+  var otherMethodIWantToExpose = function() {
+    privateMethod();
+  }
+
+  return {
+      first: methodToExpose,
+      second: otherMethodIWantToExpose
+  };
+})();
+
+Exposer.first();        // Output: This is a method I want to expose!
+Exposer.second();       // Output: Inside a private method!
+Exposer.methodToExpose; // undefined
+
+
+2. Prototype pattern: The prototype model is used mainly for creating objects in performance-intensive situations.
+                    The objects created are clones (shallow clones) of the original object that are passed around.
+
+var TeslaModelS = function() {
+  this.numWheels    = 4;
+  this.manufacturer = 'Tesla';
+  this.make         = 'Model S';
+}
+
+TeslaModelS.prototype = function() {
+
+  var go = function() {
+    // Rotate wheels
+  };
+
+  var stop = function() {
+    // Apply brake pads
+  };
+
+  return {
+    pressBrakePedal: stop,
+    pressGasPedal: go
+  }
+
+}();
+
+
+3. Publish/Subscribe (based on observer pattern): There are many times when one part of the application
+                    changes, other parts needs to be updated.
+
+var Subject = function() {
+  this.observers = [];
+
+  return {
+    subscribeObserver: function(observer) {
+      this.observers.push(observer);
+    },
+    unsubscribeObserver: function(observer) {
+      var index = this.observers.indexOf(observer);
+      if(index > -1) {
+        this.observers.splice(index, 1);
+      }
+    },
+    notifyObserver: function(observer) {
+      var index = this.observers.indexOf(observer);
+      if(index > -1) {
+        this.observers[index].notify(index);
+      }
+    },
+    notifyAllObservers: function() {
+      for(var i = 0; i < this.observers.length; i++){
+        this.observers[i].notify(i);
+      };
+    }
+  };
+};
+
+var Observer = function() {
+  return {
+    notify: function(index) {
+      console.log("Observer " + index + " is notified!");
+    }
+  }
+}
+
+var subject = new Subject();
+
+var observer1 = new Observer();
+var observer2 = new Observer();
+var observer3 = new Observer();
+var observer4 = new Observer();
+
+subject.subscribeObserver(observer1);
+subject.subscribeObserver(observer2);
+subject.subscribeObserver(observer3);
+subject.subscribeObserver(observer4);
+
+subject.notifyObserver(observer2); // Observer 2 is notified!
+
+subject.notifyAllObservers();
+// Observer 1 is notified!
+// Observer 2 is notified!
+// Observer 3 is notified!
+// Observer 4 is notified!
+
+
+4. Singleton: A Singleton only allows for a single instantiation, but many instances of the same object.
+                The Singleton restricts clients from creating multiple objects, after the first object created,
+                it will return instances of itself.
+                Singletons are susceptible to race conditions, such that if no instance were initialized first,
+                two threads could then create two objects instead of returning and instance.
+
+var printer = (function () {
+
+  var printerInstance;
+
+  function create () {
+
+    function print() {
+      // underlying printer mechanics
+    }
+
+    function turnOn() {
+      // warm up
+      // check for paper
+    }
+
+    return {
+      // public + private states and behaviors
+      print: print,
+      turnOn: turnOn
+    };
+  }
+
+  return {
+    getInstance: function() {
+      if(!printerInstance) {
+        printerInstance = create();
+      }
+      return printerInstance;
+    }
+  };
+
+})();
+
+var officePrinter = printer.getInstance();
+
+5. Façade pattern - provides an interface which shields clients from complex functionality in one or more subsystems.
+                    It is often present in systems that are built around a multi-layer architecture.
+
+var Mortgage = function(name) {
+    this.name = name;
+}
+
+Mortgage.prototype = {
+
+    applyFor: function(amount) {
+        // access multiple subsystems...
+        var result = "approved";
+        if (!new Bank().verify(this.name, amount)) {
+            result = "denied";
+        } else if (!new Credit().get(this.name)) {
+            result = "denied";
+        } else if (!new Background().check(this.name)) {
+            result = "denied";
+        }
+        return this.name + " has been " + result +
+               " for a " + amount + " mortgage";
+    }
+}
+
+var Bank = function() {
+    this.verify = function(name, amount) {
+        // complex logic ...
+        return true;
+    }
+}
+
+var Credit = function() {
+    this.get = function(name) {
+        // complex logic ...
+        return true;
+    }
+}
+
+var Background = function() {
+    this.check = function(name) {
+        // complex logic ...
+        return true;
+    }
+}
+
+function run() {
+    var mortgage = new Mortgage("Joan Templeton");
+    var result = mortgage.applyFor("$100,000");
+
+    alert(result);
+}
+
+Decorator pattern  - extends (decorates) an object’s behavior dynamically. The ability to add new behavior at runtime
+                    is accomplished by a Decorator object which ‘wraps itself’ around the original object.
+                    Multiple decorators can add or override functionality to the original object.
+
+var User = function(name) {
+    this.name = name;
+
+    this.say = function() {
+        console.log(`"User: " ${this.name}`);
+    };
+}
+
+var DecoratedUser = function(user, street, city) {
+    this.user = user;
+    this.name = user.name;  // ensures interface stays the same
+    this.street = street;
+    this.city = city;
+
+    this.say = function() {
+        console.log(`"Decorated User: " ${this.name}", "${this.street}", "${this.city}`);
+    };
+}
+
+function run() {
+
+    var user = new User("Kelly");
+    user.say();
+
+    var decorated = new DecoratedUser(user, "Broadway", "New York");
+    decorated.say();
+
+}

@@ -1,0 +1,100 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Angular and Typescript~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Q - What are decorators ?
+ 	A TS feature that helps us attach additional info to a class.
+	@Component({
+		selector: "my-app"
+		templateUrl: "./app.component.html"
+	})
+
+	export class AppComponent {
+
+	}
+
+    @Injectable - decorators used with ng2 Services. Without this, we cannot inject any other services in a service.
+                It adds a metadata to the service class.
+
+Q - Data binding ->
+	{{}} String interpolation - one way binding
+	[(ngModel)] - two way binding
+	(event) - event binding
+	[property] - property binding
+	<my-component [propertyName]="expression"></my-component>
+
+Q - Angular 2 does not scans through all your Components by default. So we need
+	to import them and add them to declarations array inside @NgModule decorator.
+
+Q - Event emitters - an object/class that angular 2 provides which helps us create,
+	emit and listen to events. They are generic types and can use multiple types.
+
+Q - What are directives?
+	They are instructions in the code which are encountered at runtime.
+	Directives use selectors - *ngIf, <app-message></app-message> to know which
+	parts of HTML represent instructions. They make the HTML dynamic.
+
+	Components are also type of directives with a template and view of their own.
+
+	Attribute directives - can only change the element they are applied on - ngStyle
+
+	Structural directives - change the Structure of the DOM - *ngIf
+
+Q - Services - prevent code duplication and reduce maintainability effort by limiting
+	methods and objects to single instance.
+	They can be injected inside components.
+
+Q - Dependency injection - allows us to provide certain instances of certain objects in places of application
+	where we need them. DI is hierarchical injector. It can provide instance per component/per module/perapp.
+
+Q - providers - array of blueprints, create the instances of Service passed.
+	They can provide service instance per component, per module per per app.
+
+Q - Form validation-
+	Template driven approach - ng2 detects the form and stores it in the form
+	of JS object, no other form fields are stored by default.
+	By using `ngModel` directive on an element we can tell ng2 to register the
+	form control along with JS object model of that form.
+
+	--> Classes added by ng2 to represent the state of form control -->
+		ng-pristine = we have not entered anything
+		ng-valid = represents a valid value even if its empty
+		ng-touched = if a user clicks inside a control
+
+	Data driven approach - reactive approach
+    Create a form programmatically and don't let ng2 detect that.
+    We can use utilities like {FormGroup, FormControl, Validators} to create form.
+    This gives us more control over form.
+    But we still need to create the HTML of form.
+
+Q - ng2 ships with a built in router
+
+	routerLinkActive - built in directive to make link active.
+	routerLink - expects an array of path to navigate
+
+Q - Observables - the concept of observables lets ng2 connect with the backend for asyc tasks. The observables are objects which
+    are bundled in ng2 in its HTTP service. We can listen to any responses that was sent to us from backend.
+
+    We can use a third party observable library like RxJs to set up subscriptions
+        subscribe()
+        map()
+
+Q - It is a good practice to break down the application in multiple components. Also make use of Lazy loading wherever possible.
+
+Q - Does the order of import statements matter ?
+
+Q - Difference between
+
+    RouterModule.forChild(ROUTES);
+    RouterModule.forRoot(ROUTES);
+
+Q - By default ng2 will do runtime compilation. This has drawbacks.
+    Default compilation is done on the browser and the compiler is a part of code that ships with ng2. It is considerably heavy (few Mbs)
+
+    AOT - ahead of time compiler to the rescue.
+
+    This compiler runs in 2 steps and stores temp files in a directory.
+    Compile all the templates and code at development time on the machine.
+    Do not add the compiler to final code and reduce the size of app to half.
+    Unnecessary code is removed and optimized.
+
+Q - what is tsconfig.json ?
+A - required for the compilation of typescript. Set up options for .ts files to be compiled to ecma.

@@ -1,0 +1,281 @@
+
+// ------------------------------------- REACT --------------------------------------------- //
+
+Components
+
+- let you split the UI into independent, reusable pieces, and think about each piece in isolation
+- React.Component is an abstract base class. So no need to refer it directly
+
+The Component Lifecycle
+
+- methods prefixed with will are called right before something happens
+- methods prefixed with did are called right after something happens
+
+Mounting - these methods are called when an instance of a component is being created and inserted into the DOM.
+
+- constructor()
+
+    Required for 2 purposes.
+    - Initializing local state by assigning an object to this.state.
+    - Binding event handler methods to an instance.
+
+    Called before component is mounted. super(props) is called before any other statement.
+    Otherwise this.props will be undefined inside the constructor. We should not call setState() in constructor instead call this.state directly.
+
+    constructor(props) {
+      super(props);
+      // Don't call this.setState() here!
+      this.state = { counter: 0 };
+      this.handleClick = this.handleClick.bind(this);
+    }
+
+
+- static getDerivedStateFromProps(props, state)
+
+     this method is fired on every render.
+     should return an object to update a state or null to update nothing.
+     it exists for rare use cases where state depends on props.
+
+
+- componentWillMount() / UNSAFE_componentWillMount() - LEGACY
+
+    is invoked just before mounting occurs.
+    It is called before render().
+    calling setState() synchronously in this method will not trigger an extra rendering.
+
+
+- render()
+
+    The only required method in a react class. Its a pure method and does not modifies state of component. It does not directly interact with browser.
+    Can return one of the following:
+
+    React Element
+    Array & fragments - let you return multiple elements from render.
+    Portals - let you render children into a different DOM subtree.
+    String/numbers
+    Boolean/null
+
+
+- componentDidMount()
+
+    This is invoked immediately after a component is mounted (inserted into the tree).
+    good place to instantiate the network request.
+    good place to set up any subscriptions.
+    we can use setState() in this method to re render the components like modals/tooltips that depend on size of DOM node.
+
+
+Updating - An update can be caused by changes to props or state. These methods are called when a component is being re-rendered.
+
+- componentWillReceiveProps(nextProps) / UNSAFE_componentWillReceiveProps(nextProps) - LEGACY
+
+    is invoked before a mounted component receives new props.
+    it does not gets called during initial mounting.
+
+
+- static getDerivedStateFromProps()
+
+    **covered above
+
+
+- shouldComponentUpdate(nextProps, nextState)
+
+    this method is to let React know if a component should update with change in state/props
+    it defaults to true.
+    not called on initial render or when forceUpdate() is used.
+    UNSAFE_componentWillUpdate(), render(), and componentDidUpdate() will not be invoked.
+
+
+- componentWillUpdate(nextProps, nextState) / UNSAFE_componentWillUpdate(nextProps, nextState) - LEGACY
+
+     is invoked just before rendering when new props or state are being received.
+     this method is not called for the initial render.
+
+
+- render()
+
+    **covered above
+
+
+- getSnapshotBeforeUpdate()
+
+    is invoked right before the most recently rendered output is committed to e.g. the DOM.
+    used to capture some information from DOM before it is potentially changed.
+    the value returned here will be passed as a parameter to componentDidUpdate().
+
+
+- componentDidUpdate(prevProps, prevState, snapshot)
+
+    Called immediately after a component is updated.
+    Not called after initial render.
+    Snapshot is undefined unless we are using method getSnapshotBeforeUpdate()
+    setState() can be called here but must be wrapped in a condition to prevent an infinite loop.
+
+
+Unmounting - This method is called when a component is being removed from the DOM.
+
+- componentWillUnmount()
+
+    invoked immediately after component is unmounted and destroyed.
+    perform necessary cleanup in this method. (clean subscriptions, clear timers, cancel network requests)
+    never call setState() method here because component will never be mounted again.
+
+
+Error Handling - This method is called when there is an error during rendering, in a lifecycle method,
+                 or in the constructor of any child component.
+
+
+ - componentDidCatch(error, info)
+
+    Error boundaries are react components that are used to catch errors anywhere in child component tree.
+    an error boundary can’t catch an error within itself.
+    a class component becomes an error boundary if it defines this lifecycle method.
+
+
+Other APIs -
+
+- setState(updater[, callback])
+
+    enqueues changes to the component state and tells React to re-render the component and its children.
+    It does not always updates the component immediately.
+    use componentDidUpdate() method or setState callback to read the state after update has been applied.
+
+    updater ->
+
+    this.setState((prevState, props) => {
+        return {quantity: prevState.quantity + 1};
+    });
+
+- forceUpdate(callback)
+
+    Its used when render() method depends on some other data, we can tell React that the component needs re-rendering.
+    It will skip the shouldComponentUpdate() method.
+    The lifecycle methods for child components will work as expected.
+    Normally its usage should be avoided.
+
+
+Class properties -
+
+- defaultProps
+
+    Property of the class itself.
+    used to set the default props for the class.
+    used for undefined props, not for null props.
+
+    class CustomButton extends React.Component {
+        // ...
+    }
+
+    CustomButton.defaultProps = {
+      color: 'blue'                 // If props.color is not provided, it will be set by default to 'blue'
+    };                              // If props.color is set to null, it will remain null:
+
+
+- displayName
+
+    The displayName string is used in debugging messages.
+    Need not set it explicitly because it’s inferred from the name of the function or class that defines the component.
+
+
+Instance properties -
+
+- props - this.props contains the props that were defined by the caller of this component.
+- state -
+
+    The state contains data specific to this component that may change over time.
+    It is user defined and should be a POJO
+    we should never mutate the this.state and instead use setState() method.
+
+
+// Shallow Renderer
+
+Shallow rendering lets you render a component “one level deep”.
+It assert facts about what its render method returns, without worrying about the behavior of child components.
+This does not require a DOM.
+
+
+// Reconciliation
+
+When a component’s props or state change, React decides whether an actual DOM update is necessary by comparing the newly returned element
+with the previously rendered one. When they are not equal, React will update the DOM.
+
+
+// REACT DOM
+
+import ReactDOM from 'react-dom'
+
+render() - ReactDOM.render(element, container[, callback])
+
+Render a React element into the DOM in the supplied container.
+Returns a reference to the component (or returns null for stateless components).
+If the React element was previously rendered, will perform an update on it and only mutate the DOM.
+It does not modifies the DOM container itself.
+
+
+hydrate() - ReactDOM.hydrate(element, container[, callback])
+
+It is used to hydrate a container whose HTML contents were rendered by ReactDOMServer.
+React will attempt to attach event listeners to the existing markup.
+
+
+unmountComponentAtNode() - ReactDOM.unmountComponentAtNode(container)
+
+It is used to remove a mounted component from the DOM and clean up the event handlers and state.
+Returns true if the component is unmounted.
+
+
+findDOMNode() - ReactDOM.findDOMNode(component)
+
+If a component is mounted on DOM, this returns the corresponding native browser DOM element.
+Usage is discouraged because it violates component abstraction.
+Cannot be used on functional components.
+
+
+createPortal() - ReactDOM.createPortal(child, container)
+
+Provide a way to render children into a DOM node that exist outside the hierarchy of DOM component.
+
+
+// Event Handling
+
+1. Events are always in camelCase
+2. We pass a function as the event handler rather than a string.
+3. We cannot return false to prevent default behaviour.
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+}
+
+
+//Keys and Lists
+
+keys help react identify which elements have changed, added or removed.
+keys give stable identity to elements inside.
+key should always be a String
+Its better not to give index as key as the order of items may change.
+Keys only serve as hint to React and they do not get passed to components.
+
+const todoItems = todos.map((todo) =>
+  <li key={todo.id}>
+    {todo.text}
+  </li>
+);

@@ -1,0 +1,1067 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~JSON~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+JavaScript Object Notation
+
+- JSON stores the data in form of name value pairs.
+
+- A JSON object is like an array of name value pairs. Each object is record of information.
+
+- JSON is faster than XML, parsing is easy and is lightweight.
+
+- Could be effectively used to transmit data over internet like XML.
+
+~~~~~~~~~~~~~~~~~~~~~JavaScript~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Calling a function
+
+-global function calls - not a good way. can cause conflicts
+
+-method call - calling a function which is defined in an object. call is made through (. dot) operator.
+
+-apply() - takes an array of values that's will be passed as arguments to the function.
+
+-call() -  takes the same arguments separately.
+
+-constructors - using new operator
+
+-anonymous function , a function w/o a name will make calls to itself.
+
+Q : Swap 2 numbers without using a third variable
+
+swapper(11,22);
+
+function swapper(a,b){
+
+	a = a+b;
+	b = a-b;
+	a = a-b;
+
+	console.log(a, b);
+}
+
+1. Define an anonymous function and its use?
+
+2. Is javascript single threaded or multi threaded ?
+	-default - single threaded
+
+3. What are different ways to access the HTML form elements ?
+	- document.getElementById("elemId");
+	- document.getElementById("formId").elemName;
+	- document.forms[i].elements[i];
+	- document.formName.elemName;
+
+4. How to detect a click outside an element?
+	- attach "click" to document and the element itself, then do event.stopPropagation() on element click.
+
+5. What is Blocking and non-blocking code? explain with example.
+
+	Non Blocking:
+	var contents = fs.readFile("../file/url", function(err, contents){
+		console.log(contents);
+	});
+	console("Do something else");
+
+	Blocking:
+	var contents = fs.readFileSync("../file/url");
+	console.log(contents);
+	console("Do something else");
+
+6. What are Closures and its use cases?
+	Whenever you see the function keyword within another function, the inner function has access to variables in the outer function. That is a closure.
+	A function doesn't have to return in order to be called a closure.
+	Simply accessing variables outside of your immediate lexical scope creates a closure.
+
+7. What is node.js ?
+   Node.js is really two things: a runtime environment and a library.
+
+8. What is the difference between == and === ?
+
+9. What are the different ways of accessing properties of an object ?
+	obj[prop]
+	obj.prop
+
+10. What is the root javascript object ?
+	Window
+
+11. Describe the difference between cookies, sessionStorage and localStorage.
+
+12. What is the arity of a function?
+	the signature of function.
+
+13. What are associative arrays ?
+	Objects
+
+15. Difference between "null" and "undefined" ?
+
+16. What's the difference between .call and .apply?
+	.apply(this, [...])
+	.call(this, param1, param2, param3, param4...)
+
+	Apply uses Arrays and Always takes one or two Arguments. When you use Call you have to Count the number of arguments.
+
+	var x = 10;
+	var o = { x: 15 };
+	function f(message)
+	{
+		alert(message);
+		alert(this.x);
+	}
+
+	f("invoking f");
+	f.call(o, "invoking f via call");
+
+	var x = 10;
+	var o = { x: 15 };
+	function f(message)
+	{
+		alert(message);
+		alert(this.x);
+	}
+
+	f("invoking f");
+	f.apply(o, ["invoking f through apply"]);
+
+	You don't have to care about the signature of the target method
+
+17. Explain "hoisting".
+	By default , all variable declarations in JS will happen just after the function is defined.
+	var x = 20;
+	function jump(){
+		console.log(x);
+		var x = 10;
+	}
+	jump();
+
+18. Describe event bubbling and event capturing.
+
+19. Difference between : methods and functions ?
+
+20. Explain how you would get a query string parameter from the browser window's URL.
+
+21. What is "use strict";? what are the advantages and disadvantages to using it?
+	Its main purpose is to do more checking.
+	For instance, blah = 33; is valid JavaScript. It means you create a completely global variable blah.
+	But in strict mode its an error because you did not use the keyword "var" to declare the variable.
+
+22. Explain the same-origin policy with regards to JavaScript.
+
+23. What is prototyping ?
+
+24. Is it possible to have two or more prototypes for one object ?
+
+25. What are mixins ?
+
+26. What is lazy loading ?
+
+27. Explain MVC pattern ?
+
+28. Alternate to prototype ?
+
+29. What are different scopes in JS.
+
+30. Why does JavaScript has a blocking model ?
+
+31. What are factory functions and constructor functions ?
+
+32. Enumerable, writable, configurable ?
+var x = {}
+Object.defineProperty(x,"name",{value : "garg", writable : true, enumerable : true});
+x.name;
+x.name = "seeta";
+x.name;
+Object.keys(x);
+["name"]
+
+------------------------------------------------ Logical Questions ----------------------------------------
+
+1. Copy an array to object ==>
+
+    Array is:
+
+	var a  = [1,2,3,4];
+
+    Object is :
+	var b = {
+		arrayCopy : []
+	}
+
+	Ans: b.arrayCopy = a.splice(0);
+
+2. Loop through an object:
+	var Empl = {key: "val"}
+
+	for(var key in Empl)
+
+3. var array = ["a","b","c"] => Convert this to "a+b+c"
+   Ans: array.join("+")
+
+4. Result of "2"+3+4  ==> 234
+			  2+"3"+4 ==> 234
+			  2+3+"4" ==> 54
+
+5. Reverse a string;
+	var name = "Tavant";
+
+	name.split("").reverse().join("");
+
+6. Tell the return type:
+
+	typeof new String();
+	Ans: "object"
+
+	typeof String();
+	Ans:"string"
+
+Q. var foo = 1;
+function bar() {
+	if (!foo) {
+		var foo = 10;
+	}
+	alert(foo);
+}
+bar();
+//result 10
+
+12. var x = 1;
+console.log(x);
+if (true) {
+	var x = 2;
+	console.log(x);
+}
+console.log(x);
+
+result: 1 2 2
+
+1- Implement Doubly linked list in JS ?
+2- [1,2,3,4].toString(); //Output "1,2,3,4"
+3- 2<<4*5%4 //Output 2
+4- ((4&5)|3)^7 //Output 0
+5- "Hello World" //Regular expression any
+6- Architecture of a Social N/w website, define a structure using MVC pattern and make a UI design.
+7- null == undefined, 0 == undefined // output true, false
+
+8. var mobile = {
+		iPhone : "Its all in the design"
+   };
+   alert(mobile); //Output object Object
+   alert(mobile.iPhone); //Output Its all in the design
+
+9. var foo = {};
+   var foobar = {};
+   foobar.foo = "foobar";
+   foo.prototype = foobar;
+   console.log(foo.foobar); //Output undefined
+
+10. function foo(getval){
+     var getval = 123;
+     console.log(getval);
+}
+var bar = new foo(321); //Output 123
+
+11. Complexity of array sort using a merge sort.
+
+12. var num = [1,2,3,,4]
+    console.log(num[3]); //Output undefined
+14. select 2nd last child ?? nth-last-child(2)
+15. ["a","b","c"] ---> a+b+c join("+");
+-----------------------------------------Cambium-----------------------------
+
+Javascript programmers are practically ranked by how well they understand scope.
+
+1.
+function myname(){
+ var a = 12;
+ var b = 10;
+}
+console.log(window.a); //Output undefined
+
+2. Can angular work as MVVM ? //Yes
+
+4. Copy an array to object
+	// array.slice(0) //clones and creates a new instance of object
+	// [].concat(array)
+
+5. What are different scopes in JS
+   global, local, intermediate (no block scope and object property),advanced (closure and prototype based)
+
+6. Loop through an object
+8. composite arrays //array of objects
+
+9.
+var a = 2;
+var b;
+console.log(a);
+console.log(b);
+console.log(a+b);
+console.log(ab);
+
+//Output 2
+//Output undefined
+//Output NaN
+//Output reference error: ab is not defined
+
+Q.
+
+function myname(){
+ var a = 12;
+ var b = 10;
+ console.log(a+b);
+}
+console.log(new myname().b);
+//output 22
+//output undefined
+
+11. Difference between:
+
+  function scopes(){
+     var a = 55;
+     this.b = 22;
+  }
+console.log(new scopes().a);  //Output undefined
+console.log(new scopes().b);  //Output 22
+
+==========================================================
+
+(function() {
+
+  console.log('this is the start');
+
+  setTimeout(function cb() {
+    console.log('this is a msg from call back');
+  });
+
+  console.log('this is just a message');
+
+  setTimeout(function cb1() {
+    console.log('this is a msg from call back1');
+  }, 0);
+
+  console.log('this is the end');
+
+})();
+
+// "this is the start"
+// "this is just a message"
+// "this is the end"
+// undefined --> note that function return, which is undefined, happens here
+// "this is a msg from call back"
+// "this is a msg from call back1"
+
+var element = document.getElementById('element');
+
+var user = {
+ firstname: 'Wilson',
+ greeting: function(){
+   alert('My name is ' + this.firstname);
+ }
+};
+
+// Attach user.greeting as a callback
+element.addEventListener('click', user.greeting);
+
+Q. What is a UMD build ?
+- makes the object globally available
+
+Q. What are JASMINE spies? how do they work?
+
+Q. What is a deep copy?
+- Copying only the values and not references.
+  let a = [1,2,3];
+  let x = a.slice(0);		//method 1
+  let y = [].concat(a);		//method 2
+
+toBe and toEqual
+- toBe = strict comparison
+- toEqual = works like a ==
+
+Q. List some Jasmine matchers
+
+initialise array with values
+Array(<NUMBER>).fill(<VALUE>)
+
+Q. sort an object by keys
+//Object.keys().sort();
+
+remove multiple items from an array
+
+check duplicates in an array
+
+Destructuring - give example and definition
+
+let a = [1,2,3,4];
+let [x,y,z] = a;
+
+Destructuring allows us to extract values from arrays and objects (even deeply nested)
+and store them in variables with a more convenient syntax.
+
+Difference between function expression and function declaration?
+
+- Function declarations are hoisted whereas function expressions are not.
+  Only the variable its assigned to gets hoisted.
+
+What does eval in javascript do ?
+
+ - Takes a string and treats it as a code. It cheats with the lexical scope and makes the code slower.
+
+Solve:
+
+var foo = "bar";
+
+function bar(){
+	var foo = "baz";
+
+	function baz(foo){
+		foo = "bam";
+		bam = "yay";
+	}
+	baz();
+}
+
+bar();
+foo;
+bam;
+baz();
+
+A:
+
+"bar";
+"yay";
+Error;
+
+Solve:
+
+foo();
+
+var foo = 2;
+
+function foo(){
+    console.log("bar");
+}
+
+function foo(){
+    console.log("foo");
+}
+
+Answer : //foo
+
+Q: What is mutual recursion?
+A: When two or more functions call each other simultaneously until a terminating condition is met.
+
+Solve:
+
+a(1);
+
+function a(foo){
+    if(foo > 20) return foo;
+    return b(foo+2);
+}
+
+function b(foo){
+    return c(foo) + 2;
+}
+
+function c(foo){
+    return a(foo*2);
+}
+
+Answer: 42
+
+there are three kind of bindings for this keyword: default or global, implicit, explicit
+
+Q: Hard binding
+A: make this keyword predictable, using call or apply or bind
+
+Q: Explain and possibly write code for bind utility in JS?
+A:
+
+	if(!Function.prototype.bind){
+		Function.prototype.bind = function(o){
+			let fn = this;
+			return function(){
+				return fn.apply(o, arguments);
+			};
+		};
+	};
+
+Q: What is 'this' keyword?
+A: Every function, while executing has a reference to its current context, called this.
+
+1. this could be default or window
+2. this could be implicit context
+3. this could be explicit or hard bound context (call, apply bind)
+
+Q: How does 'new' keyword works?
+    - Converts a function call to a constructor call.
+
+1. A brand new empty object is created.
+2. The newly created object gets linked to a different object.
+3. The newly created object gets bound as the 'this' keyword for the purpose of function call.
+4. If the function does not returns anything, then it will implicitly add a return statement.
+
+Q. Closure -
+
+A: When a function 'remembers' its lexical scope even when the function is executed outside that lexical scope.
+    The reference variables are not garbage collected until any functions referencing it are done executing.
+
+function foo(){
+    var bar = "bar";
+
+    // If the accessed value 'bar' changes over time, it will get the new value because it works by reference.
+    setTimeout(function(){
+        console.log(bar);
+    }, 1000);
+}
+
+foo();
+
+Q: Solve -
+
+function foo(){
+    let bar = 1;
+
+    setTimeout(() => { console.log(bar++) }, 100);
+    setTimeout(() => { console.log(bar++) }, 200);
+    setTimeout(() => { console.log(bar) }, 300);
+}
+
+Q. Functions in JavaScript are first class - means that they can be passed around and executed in
+	different environments.
+
+Q. Optimize the performance of a webpage:
+
+1. Minimize HTTP requests
+2. Minify and combine files
+3. Use asynchronous loading for CSS and JavaScript files
+4. Defer JavaScript loading
+5. Minimize time to first byte
+6. Reduce server response time
+7. Choose the right hosting option for your needs
+8. Run a compression audit
+9. Enable compression
+10. Enable browser caching
+11. Reduce image sizes
+12. Use a CDN
+13. Use external hosting platforms
+14. Optimize CSS delivery
+15. Prioritize above-the-fold content (lazy loading)
+16. Reduce the number of plugins you use on your site
+17. Reduce redirects
+18. Reduce external scripts
+19. Monitor your speed over time
+20. Monitor mobile page speed
+
+Cross-Origin Resource Sharing (CORS) is a mechanism that uses additional HTTP headers
+to tell a browser to let a web application running at one origin (domain) have permission
+to access selected resources from a server at a different origin.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ OOJS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Every single object is built by a constructor function.
+2. A constructor makes an object linked to its own prototype.
+
+Example: prototype linkage
+
+function Foo(who) {
+    this.me = who;
+}
+
+Foo.prototype.identify = function() {
+    return "I am " + this.me;
+};
+
+var a1 = new Foo("a1");
+var a2 = new Foo("a2");
+
+a2.speak = function() {
+    console.log("Hello, " + this.identify() + ".");
+};
+
+console.log(a1.constructor === Foo);						//true
+console.log(a1.constructor === a2.constructor);				//true
+console.log(a1.__proto__ === Foo.prototype);				//true
+console.log(a1.__proto__ === a2.__proto__);					//true
+console.log(a1.__proto__ === Object.getPrototypeOf(a1));	//true
+console.log(a2.constructor === Foo);						//true
+console.log(a1.__proto__ == a2.__proto__);					//true
+console.log(a2.__proto__ == a2.constructor.prototype);		//true
+
+---------------------------------------------------
+
+Example: prototype chain
+
+function Foo(who) {
+    this.me = who;
+}
+
+Foo.prototype.identify = function() {
+    return "I am " + this.me;
+};
+
+function Bar(who){
+    Foo.call(this, who);
+}
+
+Bar.prototype = Object.create(Foo.prototype);
+
+Bar.prototype.speak = function() {
+    console.log("Hello, " + this.identify() + ".");
+};
+
+var b1 = new Bar("b1");
+var b2 = new Bar("b2");
+
+b1.speak();     //"Hello, I am b1."
+b2.speak();     //"Hello, I am b2."
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ OOLO pattern ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+var Foo = {
+	init: function(who){
+		this.me = who;
+	},
+	identify: function(){
+		return "I am " + this.me;
+	}
+};
+
+var Bar = Object.create(Foo);
+
+Bar.speak = function(){
+	console.log("Hello, " + this.identify() + ".");
+};
+
+var b1 = Object.create(Bar);
+b1.init("b1");
+
+var b2 = Object.create(Bar);
+b2.init("b2");
+
+b1.speak();     //"Hello, I am b1."
+b2.speak();     //"Hello, I am b2."
+
+~~~~~~~~~~~~~~~ Object.create polyfill ~~~~~~~~~~~~~~~~~~~~
+
+if(!Object.create){
+	Object.create = function(o){
+		function F() {}
+		F.prototype = o;
+		return new F();
+	};
+}
+
+~~~~~~~~~~~~~~~ Generators ~~~~~~~~~~~~~~~~~~~~
+
+1. code will start and stop when it encounters yield
+2. yield works like a message passing mechanism
+3. yield can pause a generator
+4. next can resume a generator
+
+function getData(d){
+	setTimeout(function(){ run(d);}, 1000);
+}
+
+var run = coroutine(function*(){
+	var x = 1 + (yield getData(10));
+	var y = 1 + (yield getData(30));
+	var answer = (yield getData(
+		"Meaning of life: " + (x + y);
+	));
+	console.log(answer);
+	//Meaning of life: 42
+});
+
+run();
+
+Q. computed property name:
+
+const name = "rachit";
+const chars = {
+	[name] : {name, role: "like me"}
+}
+
+~~~~~~~~~~~~~~~ Promises ~~~~~~~~~~~~~~~~~~~~
+
+1. Promises solve the problem of IOC - inversion of control
+
+function getData(d){
+	retrun new Promise(function(resolve, reject){
+		setTimeout(function(){ resolve(d); }, 1000);
+	});
+}
+
+var x;
+
+getData(10)
+.then(function(num1){
+	x = 1 + num1;
+	return getData(30);
+})
+.then(function(num2){
+	var y = 1 + num2;
+	return getData("Meaning of life: " + (x + y));
+})
+.then(function(answer){
+	console.log(answer);
+	//Meaning of life: 42
+});
+
+~~~~~~~~~~~~~~~ Generators + Promises ~~~~~~~~~~~~~~~~~~~~
+
+1. ASQ - asynchronous sequences library
+2. CSP - communicating serial processes
+	   - runner can accept two or more generators which can work as round robin.
+
+function getData(d){
+	return ASQ(function(done){
+		setTimeout(function(){ done(d);}, 1000);
+	});
+}
+
+ASQ()
+.runner(function*(){
+	var x = 1 + (yield getData(10));
+	var y = 1 + (yield getData(30));
+	var answer = (yield getData(
+		"Meaning of life: " + (x + y);
+	));
+	return answer;
+})
+.val(function(answer){
+	console.log(answer);
+	//Meaning of life: 42
+});
+
+Q - Why are sessions not used as authentication mechanism in a single page app?
+  - Because we do not continuously re render the app.
+
+  let arr1 = [1,2,2,3,3,3];
+
+  let arr2 = Array.from(new Set(arr1));
+
+  for(let i = 0; i < arr2.length; i++){
+      let regex = new RegExp(arr2[i], 'g');
+      console.log("occurrences of: " + arr2[i] + ": " + arr1.toString().match(regex).length);
+  }
+
+Q - Benefits of using a module system ?
+
+Q - AMD vs UMD vs CommonJS ?
+
+ - (Compare this to CommonJS, where imports are copies of exports and consequently not alive).
+
+ - another benefit of AMD is that your modules can be objects, functions, constructors, strings, JSON and many other types, while CommonJS only supports objects as modules.
+
+ ES 6 modules: (ASYNC)
+
+1. evaluated only once no matter how many times you import a module.
+2. 'use strict' is enabled by default.
+3. imports are live read-only views of the exports which means that change in one module will be reflected everywhere its imported.
+4. modules can be objects, functions, primitive values or even JSON
+5. Do not block rendering so they are deferred by default
+6. Will be evaluated in order they are required
+7. the entire module graph should be downloaded before we can load a STATIC module
+8. eliminates the need of using a module bundler in case modules are only a few (but performance improves with bundling ~300 modules)
+9. bundlers remove the unused exports
+
+import {shout} from './lib.mjs';
+
+'./lib.mjs' --> module specifier or import specifier
+
+Dynamic import example:
+
+<script type="module">
+  (async () => {
+    const moduleSpecifier = './lib.mjs';
+    const {repeat, shout} = await import(moduleSpecifier);
+    repeat('hello');
+    // → 'hello hello'
+    shout('Dynamic import in action');
+    // → 'DYNAMIC IMPORT IN ACTION!'
+  })();
+</script>
+
+Q. Worker process - used to execute client heavy operations in a different thread.
+
+// our worker, which does some CPU-intensive operation - worker.js
+var reportResult = function(e) {
+  pi = SomeLib.computePiToSpecifiedDecimals(e.data);
+  postMessage(pi);
+};
+
+onmessage = reportResult;
+
+// our main code, in a <script>-tag in our HTML page
+var piWorker = new Worker("worker.js");
+var logResult = function(e) {
+  console.log("PI: " + e.data);
+};
+
+piWorker.addEventListener("message", logResult, false);
+piWorker.postMessage(100000);
+
+``````````````````````````````````````````````````` Algos ```````````````````````````````````````````
+
+Q - Simple Array Sum - EASY
+
+let arr = [1, 2, 3, 6, 7, 2, 5, 34, 67];
+
+function simpleArraySum(arr) {
+    let sum = arr.reduce((acc, com) => {
+        return acc+com;
+    });
+    return sum;
+}
+
+Q - Find the common array - EASY
+
+let arr1 = [1, 2, 3, 3];
+let arr2 = [1, 2, 3, 6, 7, 2, 5, 34, 67];
+
+function findCommonArray(){
+    let common = [];
+	for(let i = 0; i < arr1.length; i++){
+	    if(arr2.indexOf(arr1[i]) > -1){
+		    common.push(arr1[i]);
+			arr2.splice(arr2.indexOf(arr1[i]), 1);
+		}
+	}
+	return common;
+}
+
+Q - Arrays: Left Rotation EASY
+
+	let a = [1, 3, 2, 6, 1, 2];
+	let k = 4;
+    let b = a.splice(0, k);
+    a = [...a,...b];
+    console.log(a.join(' '));
+
+Q - Staircase, print a staircase like below - EASY
+
+	 #
+    ##
+   ###
+  ####
+ #####
+######
+
+function staircase(n) {
+    let pyramid = [];
+    for(let i = 1; i <= n ; i++){
+        pyramid.push(" ".repeat(n-i) + "#".repeat(i));
+    }
+    console.log(pyramid.join("\n"));
+}
+
+Q - Divisible Sum Pairs - find pairs of all numbers divisible by 3 - EASY
+
+let arr = [1, 3, 2, 6, 1, 2];
+
+function divisibleSumPairs(n, k, ar) {
+    let count = 0;
+    for(let i = 0; i < n; i++){
+        for(let j = i+1; j < n; j++){
+            if(Number.isInteger((ar[i]+ar[j])/k)){
+               count++;
+            }
+        }
+    }
+    return count;
+}
+
+Q - Mini-Max Sum - find the minimum and maximum possible sum of numbers in array - EASY
+let arr = [7, 4, 17, 6, 23, 9, 1, 3];
+
+function miniMaxSum(arr) {
+    let min = Math.min(...arr);
+    let max = Math.max(...arr);
+    arr.splice(arr.indexOf(min), 1);
+    arr.splice(arr.indexOf(max), 1);
+    let sum = arr.reduce(function (a, b) {
+        return a + b;
+    });
+    console.log((sum + min) + " " + (sum + max));
+}
+
+Q - Diagonal Difference - MEDIUM
+
+11 22 33
+44 55 66
+77 88 99
+
+function diagonalDifference(a, n) {
+    let sumPrimary = 0;
+    let sumSecondary = 0;
+    for(let i = 0; i < n;i++){
+       sumPrimary = a[i][i] + sumPrimary;
+    }
+    for(let j = n-1; j >= 0; j--){
+        sumSecondary = a[j][n-1-j] + sumSecondary;
+    }
+    return Math.abs(sumPrimary - sumSecondary);
+}
+
+Q - Bit Manipulation: Lonely Integer in an array of numbers - MEDIUM
+
+let a = [1, 4, 3, 2, 7, 3, 2, 4, 1];
+
+function lonelyInteger() {
+    const n = a.length;
+    if(n === 1){
+        console.log(a[0]);
+    } else {
+        a.sort();
+        for(let i = 0; i < n;){
+            if(a[i] === a[i+1]){
+               i+=2;
+            } else{
+                console.log(a[i]);
+                break;
+            }
+        }
+    }
+}
+
+function lonelyInteger() {
+    const a = [1, 4, 3, 2, 2, 7, 3, 2, 4, 1];
+	const unique = Array.from(new Set(a));
+    const n = unique.length;
+    unique.forEach((item) => {
+        if(a.indexOf(item) === a.lastIndexOf(item)){
+			console.log(item);
+		}
+    });
+}
+
+
+let a = [1, 4, 3, 2, 2, 7, 3, 2, 4, 1];
+
+function lonelyInteger() {
+    let k = {};
+
+    a.forEach((item) => {
+        if (!k[item]) {
+			k[item] = 1;
+        } else {
+			k[item] = k[item] + 1;
+        }
+    });
+
+    Object.keys(k).forEach(function (key) {
+        if (k[key] === 1) {
+			console.log(key);
+			return;
+		}
+    });
+}
+
+Q - Strings: Making Anagrams - MEDIUM
+    Print a single integer denoting the number of characters you must delete to make the two strings anagrams of each other.
+
+	let a = 'cde';
+	let b = 'abc';
+
+	let count = 0;
+	let x = a.split('').sort();
+    let y = b.split('').sort();
+    let xLen = x.length;
+
+	function anagrams() {
+		for(let i = 0; i < xLen; i++){
+	        if(y.indexOf(x[i]) === -1){
+	            ++count;
+	        } else{
+	            y.splice(y.indexOf(x[i]),1);
+	        }
+	    }
+	    console.log(count + y.length);
+	}
+
+Q - Hash Tables: Ransom Note - MEDIUM
+	Print Yes if you can use the magazine to create an untraceable replica of his ransom note; otherwise, print No.
+
+	let magazine = 'give me one grand today night';
+	let note = 'give one grand today';
+
+	function replicate(m, n, magazine, ransom){
+	    if(m >= n && m !== 0 && n !== 0){
+	        magazine.sort();
+	        ransom.sort();
+	        for(let i = 0; i < n; i++) {
+	            if(magazine.indexOf(ransom[i]) > -1){
+	                magazine.splice(magazine.indexOf(ransom[i]), 1);
+	            } else{
+	                return "No";
+	            }
+	        }
+	        return "Yes";
+	    } else {
+	        return "No";
+	    }
+	}
+
+
+Q - Bubble sort - MEDIUM
+
+	function bubbleSort() {
+	    a = [1, 4, 3, 2, 7, 3, 2, 4, 1];
+	    let swaps = 0;
+	    for (let i = 0; i < n; i++) {
+	        for (let j = 0; j < n-1; j++) {
+	            // Swap adjacent elements if they are in decreasing order
+	            if (a[j] > a[j + 1]) {
+	                let next = a[j+1];
+	                a[j+1] = a[j];
+	                a[j] = next;
+	                swaps++;
+	            }
+	        }
+	    }
+	    console.log("Array is sorted in " + swaps + " swaps.");
+	    console.log("First Element:", a[0]);
+	    console.log("Last Element:", a[n-1]);
+	}
+
+
+	caseDetail.checkFrtReasonNeed = function() {
+		const date = caseDetail.caseData.permFixDate ? caseDetail.caseData.permFixDate : new Date();
+		const currentFixDate = new Date(date).getTime();
+		const frtDueDate = caseDetail.caseCreateDate + 30*24*3600*1000 + (caseDetail.caseData.customerTimeSpent*60000);
+		let frtReasonNeed = false;
+		if (caseDetail.caseData.severity === "S1 - Emergency" ||
+			caseDetail.caseData.severity === "S2 - Major Service Impact" ||
+			caseDetail.caseData.severity === "S3 - Minor Problem") {
+			//frt due date = case create date + 30 days + customer time spent
+			if (frtDueDate < currentFixDate) {
+				frtReasonNeed = true;
+			}  else {
+				frtReasonNeed = false;
+			}
+		}
+		return frtReasonNeed;
+	};
+
+
+Q. Find the missing positive integer (minimum value)
+
+	function solution(a) {
+	    let filter = a.filter(n => n > 0);
+	    filter.sort(function(a,b){
+	       return a-b;
+	    });
+	    let len = filter.length;
+	    for(let i = 0; i < len; i++){
+	        if(filter[i] === filter[i+1]){
+	            filter.splice(i,1);
+	        }
+	    }
+	    let result = 0;
+	    len = filter.length;
+	    for(let i = 0; i <= len; i++){
+	        if(i+1 !== filter[i]){
+	            result = i+1;
+	            break;
+	        }
+	    }
+	    return result;
+	}

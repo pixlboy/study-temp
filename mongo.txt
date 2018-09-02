@@ -1,0 +1,25 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Mongo DB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Q - Start the server -> necessary to read and write to db
+	1. go to bin folder.
+	2. execute command - mongod
+
+Q - Start the shell client -> ships along with mongodb, necessary to connect to the application
+	1. go to bin folder
+	2. execute command - mongo
+
+Q - Mongoose -> its a package which works as mongo db client and provides a rich set of Functions
+	1. Schemas and Models
+	2. Validation
+	3. Intuitive Database operations
+
+Q - mongoose.Schema - creates a blueprint of the Model
+
+Q - Create models based on Schemas
+  - Models are necessary because we cannot just instantiate schemas
+
+Q - mongoose middleware - a method that will be executed whenever something happens to the data
+	example: //will be called after every delete request
+	schema.post('remove', function(err, user){
+		//TODO
+	});
