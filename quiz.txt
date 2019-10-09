@@ -1,18 +1,18 @@
-ng new <project>
-ng build
-ng serve
-ng init
-ng generate component <name> (ng g c <name>)
+## Angular imporatnt commands:
+  ng new <project> - create a new project
+  ng build - build the app
+  ng serve - start the app
+  ng generate component <name> (ng g c <name>)
 
-View encapsulation :  helping apply styles to specific component. Works by using shadow DOM and taking cryptic attribues within each component
+View encapsulation :  helping apply styles to specific component. Works by using shadow DOM and taking cryptic attribues within each component.
 Local reference/variable :  help duplicate the value bound to an HTML element
 
-Bindings: property bindings-
-1. DOM
-2. Directive - expect a JS object
-3. Custom
+## Bindings: property bindings-
+1. Event binding (click)
+2. Property / attribute binding [ngStyle]
+3. Value/string binding, ({{}}, [(model)])
 
-Lifecycle events: in same order
+## Lifecycle events: in same order
 
 1. ngOnChanges - when data-bound property value changes (executed multiple times, called only when property was bound to a component)
 2. ngOnInit - on component initialization, after first ngOnChanges (executed once)
