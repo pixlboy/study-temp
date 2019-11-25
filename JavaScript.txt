@@ -916,23 +916,6 @@ Q - Bit Manipulation: Lonely Integer in an array of numbers - MEDIUM
 let a = [1, 4, 3, 2, 7, 3, 2, 4, 1];
 
 function lonelyInteger() {
-    const n = a.length;
-    if(n === 1){
-        console.log(a[0]);
-    } else {
-        a.sort();
-        for(let i = 0; i < n;){
-            if(a[i] === a[i+1]){
-               i+=2;
-            } else{
-                console.log(a[i]);
-                break;
-            }
-        }
-    }
-}
-
-function lonelyInteger() {
     const a = [1, 4, 3, 2, 2, 7, 3, 2, 4, 1];
 	const unique = Array.from(new Set(a));
     const n = unique.length;
@@ -1031,25 +1014,6 @@ Q - Bubble sort - MEDIUM
 	    console.log("First Element:", a[0]);
 	    console.log("Last Element:", a[n-1]);
 	}
-
-
-	caseDetail.checkFrtReasonNeed = function() {
-		const date = caseDetail.caseData.permFixDate ? caseDetail.caseData.permFixDate : new Date();
-		const currentFixDate = new Date(date).getTime();
-		const frtDueDate = caseDetail.caseCreateDate + 30*24*3600*1000 + (caseDetail.caseData.customerTimeSpent*60000);
-		let frtReasonNeed = false;
-		if (caseDetail.caseData.severity === "S1 - Emergency" ||
-			caseDetail.caseData.severity === "S2 - Major Service Impact" ||
-			caseDetail.caseData.severity === "S3 - Minor Problem") {
-			//frt due date = case create date + 30 days + customer time spent
-			if (frtDueDate < currentFixDate) {
-				frtReasonNeed = true;
-			}  else {
-				frtReasonNeed = false;
-			}
-		}
-		return frtReasonNeed;
-	};
 
 
 Q. Find the missing positive integer (minimum value)
