@@ -378,6 +378,20 @@ Q. Sort an object by keys
 
 Q . Check duplicates in an array
 
+	let arr = [1,2,3,4,1,2,3,4,1,2,3,4];
+	Array.from(new Set(arr));
+
+	
+Q. Prototype to add a new element to array which is not existing:
+
+	Array.prototype.addItem = function(item){ 
+		if(this.indexOf(item) === -1) { 
+			this.push(item); 
+			return; 
+		} 
+		return 'Item already present';  
+	}
+	
 
 Q. What is ES6 destructuring - give example
 
