@@ -177,9 +177,10 @@ Object.keys(x);
 Q. Copy an array to object ==>
 
 	let a  = [1,2,3,4];
-	let b = a.slice(0);
 	
-	slice method will not change the original array.
+	let b = a.slice(0);		//	slice method will not change the original array
+	let c = [].concat(a);
+	
 
 Q. Loop through an object:
 	var Empl = {key: "val"}
@@ -259,81 +260,73 @@ var bar = new foo(321); //Output 123
     console.log(num[3]); //Output undefined
 14. select 2nd last child ?? nth-last-child(2)
 15. ["a","b","c"] ---> a+b+c join("+");
------------------------------------------Cambium-----------------------------
 
-Javascript programmers are practically ranked by how well they understand scope.
 
-1.
-function myname(){
- var a = 12;
- var b = 10;
-}
-console.log(window.a); //Output undefined
+Q.	function myname(){
+		var a = 12;
+		var b = 10;
+	}
+	console.log(window.a); 
+	// undefined
 
-2. Can angular work as MVVM ? //Yes
 
-4. Copy an array to object
-	// array.slice(0) //clones and creates a new instance of object
-	// [].concat(array)
+Q. Can angular work as MVVM ? //Yes
 
-5. What are different scopes in JS
-   global, local, intermediate (no block scope and object property),advanced (closure and prototype based)
 
-6. Loop through an object
-8. composite arrays //array of objects
+Q. What are different scopes in JS
+   
+   global, local, block scope, advanced (closure and prototype based)
 
-9.
-var a = 2;
-var b;
-console.log(a);
-console.log(b);
-console.log(a+b);
-console.log(ab);
-
-//Output 2
-//Output undefined
-//Output NaN
-//Output reference error: ab is not defined
 
 Q.
+	let a = 2;
+	let b;
+	console.log(a);
+	console.log(b);
+	console.log(a+b);
+	console.log(ab);
 
-function myname(){
- var a = 12;
- var b = 10;
- console.log(a+b);
-}
-console.log(new myname().b);
-//output 22
-//output undefined
+	//Output 2
+	//Output undefined
+	//Output NaN
+	//Output reference error: ab is not defined
 
-11. Difference between:
 
-  function scopes(){
-     var a = 55;
-     this.b = 22;
-  }
-console.log(new scopes().a);  //Output undefined
-console.log(new scopes().b);  //Output 22
+Q. 	
+	function scopes(){
+		let a = 12;
+		let b = 10;
+		this.b = a-b;
+	 	console.log(a+b);
+	}
+	
+	console.log(new scopes().a);
+	console.log(new scopes().b);
+	
+	// 22
+	// undefined
+	// 22
+	// 2
 
-==========================================================
+Q. Async function:
 
-(function() {
+	(function() {
 
-  console.log('this is the start');
+	  console.log('this is the start');
 
-  setTimeout(function cb() {
-    console.log('this is a msg from call back');
-  });
+	  setTimeout(function cb() {
+	    console.log('this is a msg from call back');
+	  });
 
-  console.log('this is just a message');
+	  console.log('this is just a message');
 
-  setTimeout(function cb1() {
-    console.log('this is a msg from call back1');
-  }, 0);
+	  setTimeout(function cb1() {
+	    console.log('this is a msg from call back1');
+	  }, 0);
 
-  console.log('this is the end');
+	  console.log('this is the end');
 
-})();
+	})();
 
 // "this is the start"
 // "this is just a message"
@@ -342,22 +335,24 @@ console.log(new scopes().b);  //Output 22
 // "this is a msg from call back"
 // "this is a msg from call back1"
 
-var element = document.getElementById('element');
+Q. Attach user.greeting as a callback
 
-var user = {
- firstname: 'Wilson',
- greeting: function(){
-   alert('My name is ' + this.firstname);
- }
-};
+	let element = document.getElementById('element');
 
-// Attach user.greeting as a callback
-element.addEventListener('click', user.greeting);
+	let user = {
+	 firstname: 'Wilson',
+	 greeting: function(){
+	   alert('My name is ' + user.firstname);
+	 }
+	};
+
+	element.addEventListener('click', user.greeting);
 
 Q. What is a UMD build ?
 - makes the object globally available
 
 Q. What are JASMINE spies? how do they work?
+
 
 Q. What is a deep copy?
 - Copying only the values and not references.
@@ -365,79 +360,85 @@ Q. What is a deep copy?
   let x = a.slice(0);		//method 1
   let y = [].concat(a);		//method 2
 
-toBe and toEqual
-- toBe = strict comparison
-- toEqual = works like a ==
 
-Q. List some Jasmine matchers
+Q. Jasmine matchers
 
-initialise array with values
-Array(<NUMBER>).fill(<VALUE>)
+	toBe and toEqual
+	- toBe = strict comparison
+	- toEqual = works like a ==
 
-Q. sort an object by keys
-//Object.keys().sort();
 
-remove multiple items from an array
+Q. Initialise array with values
+	Array(<NUMBER>).fill(<VALUE>)
 
-check duplicates in an array
 
-Destructuring - give example and definition
+Q. Sort an object by keys
+	//Object.keys().sort();
 
-let a = [1,2,3,4];
-let [x,y,z] = a;
 
-Destructuring allows us to extract values from arrays and objects (even deeply nested)
-and store them in variables with a more convenient syntax.
+Q . Check duplicates in an array
 
-Difference between function expression and function declaration?
+
+Q. What is ES6 destructuring - give example
+
+	Destructuring allows us to extract values from arrays and objects (even deeply nested) 
+	and store them in variables with a more convenient syntax.
+
+	let a = [1,2,3,4];
+	let [x,y,z] = a;
+
+
+Q. Difference between function expression and function declaration?
 
 - Function declarations are hoisted whereas function expressions are not.
   Only the variable its assigned to gets hoisted.
 
-What does eval in javascript do ?
+
+Q. What does eval in javascript do ?
 
  - Takes a string and treats it as a code. It cheats with the lexical scope and makes the code slower.
 
-Solve:
+
+Q. Solve:
 
 var foo = "bar";
 
-function bar(){
-	var foo = "baz";
+	function bar(){
+		var foo = "baz";
 
-	function baz(foo){
-		foo = "bam";
-		bam = "yay";
+		function baz(foo){
+			foo = "bam";
+			bam = "yay";
+		}
+		baz();
 	}
+
+	bar();
+	foo;
+	bam;
 	baz();
-}
 
-bar();
-foo;
-bam;
-baz();
+	A:
 
-A:
+	"bar";
+	"yay";
+	Error;
 
-"bar";
-"yay";
-Error;
+Q. Solve:
 
-Solve:
+	foo();
 
-foo();
+	var foo = 2;
 
-var foo = 2;
+	function foo(){
+	    console.log("bar");
+	}
 
-function foo(){
-    console.log("bar");
-}
+	function foo(){
+	    console.log("foo");
+	}
 
-function foo(){
-    console.log("foo");
-}
-
-Answer : //foo
+	Answer : //foo
 
 Q: What is mutual recursion?
 A: When two or more functions call each other simultaneously until a terminating condition is met.
