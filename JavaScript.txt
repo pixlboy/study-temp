@@ -174,37 +174,32 @@ Object.keys(x);
 
 ------------------------------------------------ Logical Questions ----------------------------------------
 
-1. Copy an array to object ==>
+Q. Copy an array to object ==>
 
-    Array is:
+	let a  = [1,2,3,4];
+	let b = a.slice(0);
+	
+	slice method will not change the original array.
 
-	var a  = [1,2,3,4];
-
-    Object is :
-	var b = {
-		arrayCopy : []
-	}
-
-	Ans: b.arrayCopy = a.splice(0);
-
-2. Loop through an object:
+Q. Loop through an object:
 	var Empl = {key: "val"}
 
 	for(var key in Empl)
 
-3. var array = ["a","b","c"] => Convert this to "a+b+c"
+Q. var array = ["a","b","c"] => Convert this to "a+b+c"
    Ans: array.join("+")
 
-4. Result of "2"+3+4  ==> 234
-			  2+"3"+4 ==> 234
-			  2+3+"4" ==> 54
+Q. Result of 
+	"2"+3+4  ==> 234
+	2+"3"+4 ==> 234
+	2+3+"4" ==> 54
 
-5. Reverse a string;
+Q. Reverse a string;
 	var name = "Tavant";
 
 	name.split("").reverse().join("");
 
-6. Tell the return type:
+Q. Tell the return type:
 
 	typeof new String();
 	Ans: "object"
