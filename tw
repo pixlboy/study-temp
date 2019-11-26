@@ -1,0 +1,69 @@
+//import java.util.List;
+
+/*
+  Twitter uses a microservice-based architecture, with many services depending on some central services, such as storage or caching.
+
+  Below we have the interface for a Key-value store: 
+*/
+
+// public interface KeyValueStore<K, V> {
+//   /**
+//   * Retrieve a single value from the KeyValueStore
+//   */
+//   V get(K key);
+
+//   /**
+//   * Persist a single key-value pair into the KeyValueStore
+//   */
+//   void set(K key, V value);
+// }
+
+/*
+  Our goal is to add some additional behaviours to a KeyValueStore<K, V>.
+
+  We'll want to implement a few basic behaviours, and then allow our teams to build their own should they need them.
+  
+  For example:
+    - Some teams may need to add logging to ensure they know when specific keys were set
+    - Some teams may have sensitive data and may need to filter certain keys or values from being read or written
+  
+  We'd want to allow these additional behaviours to be orderable (filtering before logging, for example), 
+  and it should be simple for teams to build and add their own.
+*/
+
+let baseKeyStore = {
+    store : {
+        'users' : 1,
+        'name': 'rachit',
+        'password': 'xyz'
+    },
+    get : function(key){
+        return this.store[key];
+    },
+    set : function(key, value = ''){
+        if(key){
+            this.store[key] = value;
+        }
+    }
+}
+
+let extendedKeyStore = Object.create(baseKeyStore);
+
+let users = extendedKeyStore.get('users');
+console.log(extendedKeyStore.store);
+
+extendedKeyStore.set = function(key, value = ''){
+    this.logMe(key);
+    if(key){
+        this.store[key] = value;
+    }
+};
+
+extendedKeyStore.logMe = function(key){
+    console.log('setting a new key', key);   
+};
+
+let thirdStore = Object.create(extendedKeyStore);
+
+thirdStore.set('game', 'cricket');
+console.log(thirdStore.store);
