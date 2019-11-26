@@ -1,0 +1,81 @@
+~~~~~~~~~~~~~~~ Generators ~~~~~~~~~~~~~~~~~~~~
+
+1. code will start and stop when it encounters yield
+2. yield works like a message passing mechanism
+3. yield can pause a generator
+4. next can resume a generator
+
+function getData(d){
+	setTimeout(function(){ run(d);}, 1000);
+}
+
+var run = coroutine(function*(){
+	var x = 1 + (yield getData(10));
+	var y = 1 + (yield getData(30));
+	var answer = (yield getData(
+		"Meaning of life: " + (x + y);
+	));
+	console.log(answer);
+	//Meaning of life: 42
+});
+
+run();
+
+Q. computed property name:
+
+const name = "rachit";
+const chars = {
+	[name] : {name, role: "like me"}
+}
+
+~~~~~~~~~~~~~~~ Promises ~~~~~~~~~~~~~~~~~~~~
+
+1. Promises solve the problem of IOC - inversion of control
+
+function getData(d){
+	retrun new Promise(function(resolve, reject){
+		setTimeout(function(){ resolve(d); }, 1000);
+	});
+}
+
+var x;
+
+getData(10)
+.then(function(num1){
+	x = 1 + num1;
+	return getData(30);
+})
+.then(function(num2){
+	var y = 1 + num2;
+	return getData("Meaning of life: " + (x + y));
+})
+.then(function(answer){
+	console.log(answer);
+	//Meaning of life: 42
+});
+
+~~~~~~~~~~~~~~~ Generators + Promises ~~~~~~~~~~~~~~~~~~~~
+
+1. ASQ - asynchronous sequences library
+2. CSP - communicating serial processes
+	   - runner can accept two or more generators which can work as round robin.
+
+function getData(d){
+	return ASQ(function(done){
+		setTimeout(function(){ done(d);}, 1000);
+	});
+}
+
+ASQ()
+.runner(function*(){
+	var x = 1 + (yield getData(10));
+	var y = 1 + (yield getData(30));
+	var answer = (yield getData(
+		"Meaning of life: " + (x + y);
+	));
+	return answer;
+})
+.val(function(answer){
+	console.log(answer);
+	//Meaning of life: 42
+});
