@@ -67,3 +67,65 @@ let thirdStore = Object.create(extendedKeyStore);
 
 thirdStore.set('game', 'cricket');
 console.log(thirdStore.store);
+
+
+
+let STORE = {
+        'users' : 1,
+        'name': 'rachit',
+        'password': 'xyz'
+    };
+    
+/// Corrected Solution
+
+let utils = {
+  logMe : function(key){
+    console.log('setting a new key ' + key);
+  },
+  set : function(key, value){
+    if(key){
+        STORE[key] = value;
+    }
+  }
+};
+
+let baseKeyStore = {
+    get : function(key){
+        return STORE[key];
+    },
+    set : function(key, value = ''){
+      utils.set(key, value);
+    }
+}
+
+let s1 = Object.create(baseKeyStore);
+
+s1.set('game', 'cricket');
+console.log("s1 gets ===>", STORE);
+
+
+let baseKeyStore_Log = Object.create(baseKeyStore);
+
+baseKeyStore_Log.set = function(key, value = ''){
+    utils.logMe(key);
+    utils.set(key, value);
+};
+
+let s2 = Object.create(baseKeyStore_Log);
+
+s2.set('hobby', 'reading');
+console.log("s2 gets ===>", STORE);
+
+
+let baseKeyStore_Filter = Object.create(baseKeyStore);
+
+baseKeyStore_Filter.filter = function(key){
+  if(key === 'password'){
+    console.log('You cannot access this key');
+  } else{
+      return STORE[key];
+  }
+};
+
+let s3 = Object.create(baseKeyStore_Filter);
+
